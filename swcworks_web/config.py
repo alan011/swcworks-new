@@ -35,7 +35,7 @@ PROVINCE_DEFINE = OrderedDict({"Beijing":"1、北京市",
                    "Taiwan":"34、台湾省",
                    "XinjiangSCJSBT":"35、新疆生产建设兵团",
                   })
-THIS_YEAR_TAG = '2018'
+THIS_YEAR_TAG = '2019'
 
 FILE_STORAGE_ROOT = '/var/django_projects/file_upload'
 TABLE_NEED_FILE   = ['table1','table10','table11','table14','table16']

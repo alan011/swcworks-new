@@ -24,7 +24,7 @@ class SWTable1(models.Model):
 
 class SWTable2(models.Model):
     ### Table descriptions.
-    SWTABLE_NAME     = "表2：2018年已停用, 2019年也未启用"
+    SWTABLE_NAME     = "表2：2019年已停用, 2019年也未启用"
 
     ### Choices definations.
     TYPE_DEFINE  = OrderedDict({
@@ -154,7 +154,7 @@ class SWTable5(models.Model):
 
     ### Choices definations.
     YEAR_TAG_DEFINE = OrderedDict({
-                        '2018':'2018年社会工作培训情况',
+                        '2019':'2019年社会工作培训情况',
                       })
 
     ### DB fields definitions.
@@ -246,7 +246,7 @@ class SWTable8(models.Model):
     ### DB fields definitions.
     id             = models.AutoField('序号',primary_key=True)
     t8_type        = models.IntegerField('类别', choices=TYPE_DEFINE.items(), null=True)
-    zjtrzl         = models.IntegerField('2018年资金投入总量（万元）', null=True)
+    zjtrzl         = models.IntegerField('2019年资金投入总量（万元）', null=True)
     jsnzzl         = models.IntegerField('较上年增长量（万元）', null=True)
     comments       = models.TextField('备注其他资金来源', default='')
     description    = models.TextField('“民政部本级彩票金社会工作和志愿服务项目”资金使用方式及用途（开展项目、活动名称及简介）', default='')
@@ -341,7 +341,7 @@ class SWTable13(models.Model):
     pxbmc          = models.CharField('培训班名称', max_length=256, null=True)
     pxlr           = models.TextField('培训内容', null=True)
     pxrs           = models.IntegerField('培训人数', null=True)
-    totalnum       = models.IntegerField('2018年全省范围内志愿者培训总人数', null=True)
+    totalnum       = models.IntegerField('2019年全省范围内志愿者培训总人数', null=True)
     jiguantotalnum = models.IntegerField('党政机关组织培训的志愿者总人数', null=True)
     fuwuzuzhitoalnum = models.IntegerField('志愿服务组织培训的志愿者总人数', null=True)
     othertotalnum  = models.IntegerField('其他组织培训的志愿者总人数', null=True)
@@ -375,7 +375,7 @@ class SWTable15(models.Model):
     ### DB fields definitions.
     id             = models.AutoField('序号',primary_key=True)
     zyfwzss        = models.IntegerField('志愿服务总时数（小时）', null=True)
-    nzyfwss        = models.IntegerField('其中：2018年志愿服务时数（小时）', null=True)
+    nzyfwss        = models.IntegerField('其中：2019年志愿服务时数（小时）', null=True)
     zdzyfwhd       = models.TextField('省级重点志愿服务活动名称及简介', default='')
     province       = models.CharField('省（市、区）', choices=PROVINCE_DEFINE.items(),max_length=32, null=True)
     reporter       = models.CharField('数据提交人',max_length=256, null=True)
@@ -390,8 +390,8 @@ class SWTable16(models.Model):
     ### DB fields definitions.
     id             = models.AutoField('序号',primary_key=True)
     zyzccs         = models.TextField('本地区激励保障志愿者的主要政策措施', null=True)
-    czzjtr         = models.IntegerField('2018年财政资金投入', null=True)
-    fcjtr          = models.IntegerField('2018年福彩金投入', null=True)
+    czzjtr         = models.IntegerField('2019年财政资金投入', null=True)
+    fcjtr          = models.IntegerField('2019年福彩金投入', null=True)
     province       = models.CharField('省（市、区）', choices=PROVINCE_DEFINE.items(),max_length=32, null=True)
     reporter       = models.CharField('数据提交人',max_length=256, null=True)
     report_time    = models.DateTimeField('数据提交时间',default=timezone.now)
@@ -409,11 +409,11 @@ class SWTable17(models.Model):
     ### DB fields definitions.
     id             = models.AutoField('序号',primary_key=True)
     level          = models.IntegerField('级别', choices=LEVEL_DEFINE.items(), null=True)
-    czxzj          = models.IntegerField('2018年财政性资金（万元）', null=True)
-    cpgyj          = models.IntegerField('2018年彩票公益金（万元）', null=True)
-    qtzj           = models.IntegerField('2018年其他资金（万元）', null=True)
+    czxzj          = models.IntegerField('2019年财政性资金（万元）', null=True)
+    cpgyj          = models.IntegerField('2019年彩票公益金（万元）', null=True)
+    qtzj           = models.IntegerField('2019年其他资金（万元）', null=True)
     qtzj_comments  = models.TextField('其他资金备注', null=True)
-    zjtr_total     = models.IntegerField('2018年总计投入', null=True)
+    zjtr_total     = models.IntegerField('2019年总计投入', null=True)
     zfgm           = models.IntegerField('其中：政府购买志愿服务运营管理的资金（万元）', null=True)
     province       = models.CharField('省（市、区）', choices=PROVINCE_DEFINE.items(),max_length=32, null=True)
     reporter       = models.CharField('数据提交人',max_length=256, null=True)
