@@ -1,5 +1,6 @@
 from .for_swtable1 import getAPIForSWTable1, addAPIForSWTable1, deleteAPIForSWTable1, updateAPIForSWTable1
 from .for_swtable2 import getAPIForSWTable2, addAPIForSWTable2, deleteAPIForSWTable2, updateAPIForSWTable2
+from .for_swtable2_for_2019 import getAPIForSWTable2For2019, addAPIForSWTable2For2019, deleteAPIForSWTable2For2019, updateAPIForSWTable2For2019
 from .for_swtable3 import getAPIForSWTable3, addAPIForSWTable3, deleteAPIForSWTable3, updateAPIForSWTable3
 from .for_swtable4 import getAPIForSWTable4, addAPIForSWTable4, deleteAPIForSWTable4, updateAPIForSWTable4
 from .for_swtable5 import getAPIForSWTable5, addAPIForSWTable5, deleteAPIForSWTable5, updateAPIForSWTable5
@@ -35,5 +36,6 @@ __all__ = [
     'getAPIForSWTable15','addAPIForSWTable15','deleteAPIForSWTable15','updateAPIForSWTable15',
     'getAPIForSWTable16','addAPIForSWTable16','deleteAPIForSWTable16','updateAPIForSWTable16',
     'getAPIForSWTable17','addAPIForSWTable17','deleteAPIForSWTable17','updateAPIForSWTable17',
+    'getAPIForSWTable2For2019', 'addAPIForSWTable2For2019', 'deleteAPIForSWTable2For2019', 'updateAPIForSWTable2For2019',
     'fileUploador',
 ]

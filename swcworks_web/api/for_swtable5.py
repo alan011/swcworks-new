@@ -36,6 +36,7 @@ def getAPIForSWTable5(request, *args, **kwargs):
                     'num'        : str(obj.pxrc),
                     'increase'   : str(obj.jqnzzl),
                     'year_tag'   : obj.year_tag,
+                    'zheng_ti_gui_hua': obj.zheng_ti_gui_hua,
                     }
         ret_data['data'].append(tmp_data)
 
@@ -79,6 +80,7 @@ def addAPIForSWTable5(request, *args, **kwargs):
     else:
         attrs['jqnzzl'] = int(post_data['increase'])
 
+    attrs['zheng_ti_gui_hua'] = post_data.get('zheng_ti_gui_hua', '')
     attrs['year_tag'] = config.THIS_YEAR_TAG
     attrs['province'] = user_group
     attrs['reporter'] = request.user.username
@@ -193,7 +195,10 @@ def updateAPIForSWTable5(request, *args, **kwargs):
             error_message = "ERROR: 'increase' field must be a number."
             print(error_message)
             return HttpResponse(json.dumps({'message':error_message}), content_type='application/json', status=400)
-
+    
+    if post_data.get('zheng_ti_gui_hua') is not None:
+        obj.zheng_ti_gui_hua = post_data['zheng_ti_gui_hua']
+ 
     try:
         obj.save()
     except:

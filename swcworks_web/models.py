@@ -24,7 +24,7 @@ class SWTable1(models.Model):
 
 class SWTable2(models.Model):
     ### Table descriptions.
-    SWTABLE_NAME     = "表2：2018年已停用"
+    SWTABLE_NAME     = "表2：2018年已停用, 2019年也未启用"
 
     ### Choices definations.
     TYPE_DEFINE  = OrderedDict({
@@ -50,12 +50,12 @@ class SWTable2(models.Model):
 
 class SWTable3(models.Model):
     ### Table descriptions.
-    SWTABLE_NAME     = "表2：社会工作岗位开发设置情况统计表"
+    SWTABLE_NAME     = "表3：其他单位社会工作岗位开发设置情况统计表"
 
     ### Choices definations.
     TYPE_DEFINE = OrderedDict({
                     1:"乡镇、街道和社区",
-                    2:"民政事业单位",
+                    2:"民政事业单位", # 2019年已取消此项，后端此处暂时保留
                     3:"其他系统事业单位",
                     4:"社会组织",
                     5:"其他（请在备注注明）",
@@ -109,7 +109,7 @@ class SWTable3(models.Model):
 
 class SWTable4(models.Model):
     ### Table descriptions.
-    SWTABLE_NAME     = "表3：社会工作专业人才资源情况统计表"
+    SWTABLE_NAME     = "表4：社会工作专业人才资源情况统计表"
 
     ### Choices definations.
     TYPE_DEFINE = OrderedDict({
@@ -150,7 +150,7 @@ class SWTable4(models.Model):
 
 class SWTable5(models.Model):
     ### Table descriptions.
-    SWTABLE_NAME     = "表4：社会工作专业人才培训情况统计表"
+    SWTABLE_NAME     = "表5：社会工作专业人才培训情况统计表"
 
     ### Choices definations.
     YEAR_TAG_DEFINE = OrderedDict({
@@ -162,13 +162,14 @@ class SWTable5(models.Model):
     year_tag       = models.CharField('统计年份', max_length=8, choices=YEAR_TAG_DEFINE.items(), null=True)
     pxrc           = models.IntegerField('培训人次', null=True)
     jqnzzl         = models.IntegerField('较去年增长量', null=True)
+    zheng_ti_gui_hua = models.TextField('社会工作人才纳入本省（区市）人才培养整体规划情况:',  default="")
     province       = models.CharField('省（市、区）', choices=PROVINCE_DEFINE.items(),max_length=32, null=True)
     reporter       = models.CharField('数据提交人',max_length=256, null=True)
     report_time    = models.DateTimeField('数据提交时间',default=timezone.now)
 
 class SWTable6(models.Model):
     ### Table descriptions.
-    SWTABLE_NAME     = "表5：社会工作行业协会情况统计表"
+    SWTABLE_NAME     = "表6：社会工作行业协会情况统计表"
 
     ### Choices definations.
     LEVEL_DEFINE = OrderedDict({
@@ -190,7 +191,7 @@ class SWTable6(models.Model):
 
 class SWTable7(models.Model):
     ### Table descriptions.
-    SWTABLE_NAME     = "表6：民办社会工作服务机构情况统计表"
+    SWTABLE_NAME     = "表7：民办社会工作服务机构情况统计表"
 
     LEVEL_DEFINE = OrderedDict({
                     1:'省级民政部门登记',
@@ -232,7 +233,7 @@ class SWTable7(models.Model):
 
 class SWTable8(models.Model):
     ### Table descriptions.
-    SWTABLE_NAME     = "表7：社会工作资金投入情况统计表"
+    SWTABLE_NAME     = "表8：社会工作资金投入情况统计表"
 
     ### Choices definations.
     TYPE_DEFINE      = OrderedDict({
@@ -255,7 +256,7 @@ class SWTable8(models.Model):
 
 class SWTable9(models.Model):
     ### Table descriptions.
-    SWTABLE_NAME     = "表8：社会工作试点示范、工程、计划、项目开展情况统计表"
+    SWTABLE_NAME     = "表9：社会工作试点示范、工程、计划、项目开展情况统计表"
 
     ### Choices definations.
     TYPE_DEFINE    = OrderedDict({
@@ -278,7 +279,7 @@ class SWTable9(models.Model):
 
 class SWTable10(models.Model):
     ### Table descriptions.
-    SWTABLE_NAME     = "表9：出台志愿服务政策情况统计表"
+    SWTABLE_NAME     = "表10：出台志愿服务政策情况统计表"
 
     ### DB fields definitions.
     id             = models.AutoField('序号',primary_key=True)
@@ -292,7 +293,7 @@ class SWTable10(models.Model):
 
 class SWTable11(models.Model):
     ### Table descriptions.
-    SWTABLE_NAME     = "表10：志愿服务组织情况统计表"
+    SWTABLE_NAME     = "表11：志愿服务组织情况统计表"
     FIELD_HAT      = "在民政部门登记的志愿服务组织数"
     FIELDS_NEED_HAT = ('shtt','shfwjg','jjh')
 
@@ -319,7 +320,7 @@ class SWTable11(models.Model):
 
 class SWTable12(models.Model):
     ### Table descriptions.
-    SWTABLE_NAME     = "表11：志愿者注册情况统计表"
+    SWTABLE_NAME     = "表12：志愿者注册情况统计表"
 
     ### DB fields definitions.
     id             = models.AutoField('序号',primary_key=True)
@@ -332,7 +333,7 @@ class SWTable12(models.Model):
 
 class SWTable13(models.Model):
     ### Table descriptions.
-    SWTABLE_NAME     = "表12：志愿者培训情况统计表"
+    SWTABLE_NAME     = "表13：志愿者培训情况统计表"
 
     ### DB fields definitions.
     id             = models.AutoField('序号',primary_key=True)
@@ -352,7 +353,7 @@ class SWTable13(models.Model):
 
 class SWTable14(models.Model):
     ### Table descriptions.
-    SWTABLE_NAME     = "表14：志愿服务记录工作开展情况统计表"
+    SWTABLE_NAME     = "表15：志愿服务记录工作开展情况统计表"
     FIELD_HAT      = "开展志愿服务记录工作的地方和单位数量（个）"
     FIELDS_NEED_HAT = ('xsl','jsl','sqsl','dwsl')
 
@@ -369,7 +370,7 @@ class SWTable14(models.Model):
 
 class SWTable15(models.Model):
     ### Table descriptions.
-    SWTABLE_NAME     = "表13：志愿服务活动开展情况统计表"
+    SWTABLE_NAME     = "表14：志愿服务活动开展情况统计表"
 
     ### DB fields definitions.
     id             = models.AutoField('序号',primary_key=True)
@@ -382,7 +383,7 @@ class SWTable15(models.Model):
 
 class SWTable16(models.Model):
     ### Table descriptions.
-    SWTABLE_NAME     = "表15：志愿者激励保障情况统计表"
+    SWTABLE_NAME     = "表16：志愿者激励保障情况统计表"
     FIELD_HAT        = "全省用于激励保障的资金投入量（万元）"
     FIELDS_NEED_HAT  = ('zyzccs','czzjtr')
 
@@ -397,7 +398,7 @@ class SWTable16(models.Model):
 
 class SWTable17(models.Model):
     ### Table descriptions.
-    SWTABLE_NAME     = "表16：志愿服务资金投入情况统计表"
+    SWTABLE_NAME     = "表17：志愿服务资金投入情况统计表"
 
     ### Choices definations.
     LEVEL_DEFINE = OrderedDict({
@@ -417,3 +418,23 @@ class SWTable17(models.Model):
     province       = models.CharField('省（市、区）', choices=PROVINCE_DEFINE.items(),max_length=32, null=True)
     reporter       = models.CharField('数据提交人',max_length=256, null=True)
     report_time    = models.DateTimeField('数据提交时间',default=timezone.now)
+
+
+class SWTable2For2019(models.Model):
+    # 2019年新增的表。取代2017年以前的表2
+    SWTABLE_NAME = "表2：民政事业单位社会工作岗位开发设置情况统计表"
+    TYPE_CHOICES = ["养老机构","精神疾病服务机构", "儿童福利机构", "救助管理机构", "殡葬服务机构", "婚姻家庭服务机构", "其他（请注明）"]
+
+    id = models.AutoField('序号', primary_key=True)
+    jigou_type = models.CharField("机构类别", max_length=128, default="")  # choice from TYPE_CHOICES
+    qitajigou_comment = models.TextField("其他机构备注", default="")
+    zongshu = models.IntegerField("机构总数量（个）", default=0)
+    szsgks = models.IntegerField("设置社工科（室）的机构数量（个）", default=0)
+    wszsgks = models.IntegerField("未设置社工科（室）但设有社工岗位的机构数量（个）", default=0)
+    sggw = models.IntegerField("社工岗位数量（个）", default=0)
+    province = models.CharField('省（市、区）', choices=PROVINCE_DEFINE.items(), max_length=32, null=True)
+    reporter = models.CharField('数据提交人', max_length=256, null=True)
+    report_time = models.DateTimeField('数据提交时间', default=timezone.now)
+
+    fields = ['id', 'jigou_type', 'qitajigou_comment', 'zongshu', 'szsgks', 'wszsgks', 'sggw', 'province']
+
