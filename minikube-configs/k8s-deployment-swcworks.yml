@@ -1,0 +1,61 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: swcworks
+spec:
+  selector:
+    matchLabels:
+      app: swcworks
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: swcworks
+    spec:
+      containers:
+      - name: swcworks
+        image: local/swcworks:v1.0.0
+        env:
+        - name: PYTHONUNBUFFERED
+          value: "opened"
+        ports:
+        - containerPort: 8000
+        volumeMounts:
+        - mountPath: /srv
+          name: swcworks-code
+      volumes:
+      - name: swcworks-code
+        hostPath:
+          path: /srv/SWCWorks
+          type: Directory
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: swcworks-service 
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app: swcworks
+
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: swcworks-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.org/websocket-services: "swcworks-service"
+spec:
+  rules:
+  - host: swcworks.dev.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: swcworks-service
+          servicePort: 80
