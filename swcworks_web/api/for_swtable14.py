@@ -41,7 +41,7 @@ def getAPIForSWTable14(request, *args, **kwargs):
                     }
         ret_data['data'].append(tmp_data)
 
-    user_storage = os.path.join(config.FILE_STORAGE_ROOT, user_group, request.user.username, 'table14')
+    user_storage = os.path.join(config.FILE_STORAGE_ROOT, user_group, request.user.username, 'table15')
     ret_data['fileList'] = get_file_list(user_storage)
     print('SUCCESS: %d entries of data returned.' % ret_data['total'])
     return HttpResponse(json.dumps(ret_data), content_type='application/json')
