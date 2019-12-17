@@ -6,11 +6,11 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
 from datetime import datetime
-import json, re
+import json, re, os
 
 from swcworks_web.models import SWTable13
 from swcworks_web import config
-from .common_tools import get_user_group, json_load
+from .common_tools import get_user_group, json_load, get_file_list
 
 @login_required
 def getAPIForSWTable13(request, *args, **kwargs):
@@ -44,6 +44,8 @@ def getAPIForSWTable13(request, *args, **kwargs):
                     }
         ret_data['data'].append(tmp_data)
 
+    user_storage = os.path.join(config.FILE_STORAGE_ROOT, user_group, request.user.username, 'table13')
+    ret_data['fileList'] = get_file_list(user_storage)
     print('SUCCESS: %d entries of data returned.' % ret_data['total'])
     return HttpResponse(json.dumps(ret_data), content_type='application/json')
 
