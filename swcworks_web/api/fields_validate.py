@@ -7,7 +7,7 @@ def vld_choice(value, choices):
 def vld_int(value, min=0, max=999999999999):
     if re.search('^[0-9]+$', str(value)):
         val = int(value)
-        if min < val < max:
+        if min <= val <= max:
             return val
     return None
 
