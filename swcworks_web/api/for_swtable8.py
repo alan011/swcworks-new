@@ -11,6 +11,7 @@ import json, re
 from swcworks_web.models import SWTable8
 from swcworks_web import config
 from .common_tools import get_user_group, json_load
+from .fields_validate import vld_float
 
 @login_required
 def getAPIForSWTable8(request, *args, **kwargs):
@@ -84,19 +85,17 @@ def addAPIForSWTable8(request, *args, **kwargs):
     else:
         attrs['t8_type'] = int(post_data['type'])
         if attrs['t8_type'] in (1,2,3):
-            if not post_data.get('touruNum') or not re.search('^[0-9]+$',str(post_data['touruNum'])):
+            attrs['zjtrzl'] = vld_float(post_data.get('touruNum'))
+            if attrs['zjtrzl'] is None:
                 error_message = "ERROR: To add data failed. Field 'touruNum' must be provided and should be a number."
                 print(error_message)
                 return HttpResponse(json.dumps({'message':error_message}), content_type='application/json', status=400)
-            else:
-                attrs['zjtrzl'] = int(post_data['touruNum'])
 
-            if not post_data.get('increase') or not re.search('^[0-9]+$',str(post_data['increase'])):
+            attrs['jsnzzl'] = vld_float(post_data.get['increase'])
+            if attrs['jsnzzl'] is None:
                 error_message = "ERROR: To add data failed. Field 'increase' must be provided and should be a number."
                 print(error_message)
                 return HttpResponse(json.dumps({'message':error_message}), content_type='application/json', status=400)
-            else:
-                attrs['jsnzzl'] = int(post_data['increase'])
 
             if attrs['t8_type'] == 3 and 'comments' in post_data:
                 attrs['comments'] = post_data['comments']
@@ -218,21 +217,33 @@ def updateAPIForSWTable8(request, *args, **kwargs):
             print(error_message)
             return HttpResponse(json.dumps({'message':error_message}), content_type='application/json', status=400)
         if obj.t8_type in (1,2,3):
-            if post_data.get('touruNum'):
-                if re.search('^[0-9]+$',str(post_data['touruNum'])):
-                    obj.zjtrzl = int(post_data['touruNum'])
-                else:
+            if post_data.get('touruNum') is not None:
+                # if re.search('^[0-9]+$',str(post_data['touruNum'])):
+                #     obj.zjtrzl = int(post_data['touruNum'])
+                # else:
+                #     error_message = "ERROR: 'touruNum' field must be a number."
+                #     print(error_message)
+                #     return HttpResponse(json.dumps({'message':error_message}), content_type='application/json', status=400)
+                val = vld_float(post_data['touruNum'])
+                if val is None:
                     error_message = "ERROR: 'touruNum' field must be a number."
                     print(error_message)
-                    return HttpResponse(json.dumps({'message':error_message}), content_type='application/json', status=400)
+                    return HttpResponse(json.dumps({'message': error_message}), content_type='application/json', status=400)
+                obj.zjtrzl = val
 
-            if post_data.get('increase'):
-                if re.search('^[0-9]+$',str(post_data['increase'])):
-                    obj.jsnzzl = int(post_data['increase'])
-                else:
+            if post_data.get('increase') is not None:
+                val = vld_float(post_data['increase'])
+                if val is None:
                     error_message = "ERROR: 'increase' field must be a number."
                     print(error_message)
-                    return HttpResponse(json.dumps({'message':error_message}), content_type='application/json', status=400)
+                    return HttpResponse(json.dumps({'message': error_message}), content_type='application/json', status=400)
+                obj.jsnzzl = val
+                # if re.search('^[0-9]+$',str(post_data['increase'])):
+                #     obj.jsnzzl = int(post_data['increase'])
+                # else:
+                #     error_message = "ERROR: 'increase' field must be a number."
+                #     print(error_message)
+                #     return HttpResponse(json.dumps({'message':error_message}), content_type='application/json', status=400)
             if obj.t8_type == 3 and 'comments' in post_data:
                 obj.comments = post_data['comments']
         elif obj.t8_type == 4 and 'description' in post_data:

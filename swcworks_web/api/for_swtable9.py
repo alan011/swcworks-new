@@ -11,6 +11,7 @@ import json, re
 from swcworks_web.models import SWTable9
 from swcworks_web import config
 from .common_tools import get_user_group, json_load
+from .fields_validate import vld_float
 
 @login_required
 def getAPIForSWTable9(request, *args, **kwargs):
@@ -103,12 +104,11 @@ def addAPIForSWTable9(request, *args, **kwargs):
     else:
         attrs['num'] = int(post_data['num'])
 
-    if not post_data.get('trzj') or not re.search('^[0-9]+$', str(post_data.get('trzj'))):
+    attrs['trzj'] = vld_float(post_data.get('trzj'))
+    if attrs['trzj'] is None:
         error_message = "ERROR: To add data failed. Field 'trzj' must be provided, and must be a Number."
         print(error_message)
         return HttpResponse(json.dumps({'message':error_message}), content_type='application/json', status=400)
-    else:
-        attrs['trzj'] = int(post_data['trzj'])
 
     attrs['province'] = user_group
     attrs['reporter'] = request.user.username
@@ -222,10 +222,9 @@ def updateAPIForSWTable9(request, *args, **kwargs):
             error_message = "ERROR: 'num' field must be a number."
             print(error_message)
             return HttpResponse(json.dumps({'message':error_message}), content_type='application/json', status=400)
-    if post_data.get('trzj'):
-        if re.search('^[0-9]+$',str(post_data['trzj'])):
-            obj.trzj = int(post_data['trzj'])
-        else:
+    if post_data.get('trzj') is not None:
+        obj.trzj = vld_float(post_data['trzj'])
+        if obj.trzj is None:
             error_message = "ERROR: 'trzj' field must be a number."
             print(error_message)
             return HttpResponse(json.dumps({'message':error_message}), content_type='application/json', status=400)

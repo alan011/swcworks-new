@@ -11,6 +11,8 @@ import json, re, os
 from swcworks_web.models import SWTable16
 from swcworks_web import config
 from .common_tools import get_user_group, json_load, get_file_list
+from .fields_validate import vld_float
+
 
 @login_required
 def getAPIForSWTable16(request, *args, **kwargs):
@@ -74,19 +76,17 @@ def addAPIForSWTable16(request, *args, **kwargs):
     else:
         attrs['zyzccs'] = post_data['measure']
 
-    if not post_data.get('czzj') or not re.search('^[0-9]+$',str(post_data['czzj'])):
+    attrs['czzjtr'] = vld_float(post_data['czzj'])
+    if attrs['czzjtr'] is None:
         error_message = "ERROR: To add data failed. Field 'czzj' must be provided and should be a number."
         print(error_message)
         return HttpResponse(json.dumps({'message':error_message}), content_type='application/json', status=400)
-    else:
-        attrs['czzjtr'] = int(post_data['czzj'])
 
-    if not post_data.get('fcj') or not re.search('^[0-9]+$',str(post_data['fcj'])):
+    attrs['fcjtr'] = vld_float(post_data['fcj'])
+    if attrs['fcjtr'] is None:
         error_message = "ERROR: To add data failed. Field 'fcj' must be provided and should be a number."
         print(error_message)
         return HttpResponse(json.dumps({'message':error_message}), content_type='application/json', status=400)
-    else:
-        attrs['fcjtr'] = int(post_data['fcj'])
 
     attrs['province'] = user_group
     attrs['reporter'] = request.user.username
@@ -186,22 +186,20 @@ def updateAPIForSWTable16(request, *args, **kwargs):
         return HttpResponse(json.dumps({'message':error_message}), content_type='application/json', status=400)
 
     ### update obj.
-    if post_data.get('czzj'):
-        if re.search('^[0-9]+$',str(post_data['czzj'])):
-            obj.czzjtr = int(post_data['czzj'])
-        else:
+    if post_data.get('czzj') is not None:
+        obj.czzjtr = vld_float(post_data['czzj'])
+        if obj.czzjtr is None:
             error_message = "ERROR: 'czzj' field must be a number."
             print(error_message)
             return HttpResponse(json.dumps({'message':error_message}), content_type='application/json', status=400)
-    if post_data.get('fcj'):
-        if re.search('^[0-9]+$',str(post_data['fcj'])):
-            obj.fcjtr = int(post_data['fcj'])
-        else:
+    if post_data.get('fcj') is not None:
+        obj.fcjtr = vld_float(post_data['fcj'])
+        if obj.fcjtr is None:
             error_message = "ERROR: 'fcj' field must be a number."
             print(error_message)
             return HttpResponse(json.dumps({'message':error_message}), content_type='application/json', status=400)
 
-    if post_data.get('measure'):
+    if post_data.get('measure') is not None:
         obj.zyzccs = post_data['measure']
 
     try:
