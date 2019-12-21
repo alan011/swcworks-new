@@ -91,7 +91,7 @@ def addAPIForSWTable8(request, *args, **kwargs):
                 print(error_message)
                 return HttpResponse(json.dumps({'message':error_message}), content_type='application/json', status=400)
 
-            attrs['jsnzzl'] = vld_float(post_data.get['increase'])
+            attrs['jsnzzl'] = vld_float(post_data.get('increase'))
             if attrs['jsnzzl'] is None:
                 error_message = "ERROR: To add data failed. Field 'increase' must be provided and should be a number."
                 print(error_message)
