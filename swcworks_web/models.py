@@ -24,7 +24,7 @@ class SWTable1(models.Model):
 
 class SWTable2(models.Model):
     ### Table descriptions.
-    SWTABLE_NAME     = "表2：2019年已停用, 2019年也未启用"
+    SWTABLE_NAME     = "表2：2018年已停用, 2019年也未启用"
 
     ### Choices definations.
     TYPE_DEFINE  = OrderedDict({
