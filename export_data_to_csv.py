@@ -17,7 +17,7 @@ out_dir='/root/swc_data_export'
 
 translate_fields = OrderedDict({
     SWTable1:{},
-    SWTable2:{},
+    SWTable2For2019: {},
     SWTable3:{'t3_type':SWTable3.TYPE_DEFINE},
     SWTable4:{},
     SWTable5:{},
