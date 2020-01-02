@@ -38,7 +38,7 @@ def getAPIForSWTable3(request, *args, **kwargs):
                     'fuwuzhanNum': str(obj.fwzsz),
                     'otherNum'   : str(obj.wmq),
                     'nojobNum'   : str(obj.shgzr),
-                    'comments'   : obj.comments,
+                    'comment'   : obj.comments,
                     }
         ret_data['data'].append(tmp_data)
 
@@ -103,10 +103,10 @@ def addAPIForSWTable3(request, *args, **kwargs):
     else:
         attrs['shgzr'] = int(post_data['nojobNum'])
 
-    if not post_data.get('comments'):
+    if not post_data.get('comment'):
         attrs['comments'] = ''
     else:
-        attrs['comments'] = post_data['comments']
+        attrs['comments'] = post_data['comment']
 
     attrs['province'] = user_group
     attrs['reporter'] = request.user.username
@@ -246,8 +246,8 @@ def updateAPIForSWTable3(request, *args, **kwargs):
             print(error_message)
             return HttpResponse(json.dumps({'message':error_message}), content_type='application/json', status=400)
 
-    if 'comments' in post_data:
-        obj.comments = post_data['comments']
+    if 'comment' in post_data:
+        obj.comments = post_data['comment']
 
     try:
         obj.save()
